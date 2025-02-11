@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="fashion_section">
+    <div class="container mt-5 fashion_section">
+        <div class="row product-detail-container">
+            <!-- Product Image Section -->
+            <div class="col-md-6 product-image-container">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail-image" id="productImage">
+                {% else %}
+                    <img src="/static/images/default_product_image.jpg" alt="Product Image" class="product-detail-image" id="productImage">
+                {% endif %}
+            </div>
+            
+            <!-- Product Info Section -->
+            <div class="col-md-6 product-info">
+                <h1 class="product-title">{{ product.name }}</h1>
+                <div class="price-and-rating">
+                    <p class="product-price">${{ product.price|floatformat:2 }}</p>
+                    <div class="product-rating">
+                        <!-- Dynamic Rating System (you can add star ratings here later) -->
+                        <span class="rating">★★★★☆</span> (25 reviews)
+                    </div>
+                </div>
+                
+                <!-- Add to Cart Section -->
+                <div class="product-actions">
+                    <form action="{% url 'add_to_cart' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn add-to-cart-btn">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Product Tabs Section -->
+        <div class="product-tabs mt-4">
+            <ul class="tabs d-flex list-unstyled">
+                <li class="tab-item active" data-tab="tab-1">Description</li>
+                <li class="tab-item" data-tab="tab-2">Reviews</li>
+                <li class="tab-item" data-tab="tab-3">Specifications</li>
+            </ul>
+            
+            <div class="tab-content mt-3">
+                <div id="tab-1" class="tab-pane active">
+                    <h3>Product Description</h3>
+                    <p>{{ product.description }}</p>
+                </div>
+                <div id="tab-2" class="tab-pane">
+                    <h3>Customer Reviews</h3>
+                    <p>No reviews yet. Be the first to review this product!</p>
+                </div>
+                <div id="tab-3" class="tab-pane">
+                    <h3>Product Specifications</h3>
+                    <p>Here you can add specifications of the product.</p>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+    <!-- JavaScript for Tab functionality -->
+    <script>
+        const tabs = document.querySelectorAll('.tab-item');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+    
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const target = this.getAttribute('data-tab');
+                
+                // Hide all tab panes
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+                
+                // Remove active class from all tabs
+                tabs.forEach(tab => tab.classList.remove('active'));
+                
+                // Show the clicked tab content
+                document.getElementById(target).classList.add('active');
+                
+                // Add active class to the clicked tab
+                this.classList.add('active');
+            });
+        });
+    </script>
+    
+   
+    <style>
+        /* Product Image Styles */
+        .product-image-container {
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .product-detail-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-detail-image:hover {
+            transform: scale(1.05);
+        }
+    
+        .product-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .product-price {
+            font-size: 1.5em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .product-rating {
+            font-size: 1.2em;
+            color: #f39c12;
+        }
+        .rating {
+            font-size: 1.5em;
+        }
+    
+        /* Button Styling */
+        .add-to-cart-btn {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #2ecc71;
+        }
+    
+        /* Tabs Styling */
+        .tabs {
+            gap: 10px;
+        }
+        .tab-item {
+            padding: 15px 30px;
+            background-color: #ecf0f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-item.active {
+            background-color: #fff;
+            color: #27ae60;
+            border-bottom: none;
+        }
+        .tab-item:hover {
+            background-color: #dcdcdc;
+        }
+    
+        .tab-content {
+            margin-top: 20px;
+        }
+        .tab-pane {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+    
+        /* General Layout Improvements */
+    </style>
+    
+</div>
+{% endblock %}

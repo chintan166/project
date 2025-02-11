@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* General Styles for Product Listing */
+    .product-listing-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    /* Individual Product Card Styling */
+    .product-card {
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    /* Image Styling */
+    .product-image img {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #e1e1e1;
+        object-fit: cover;
+        max-height: 250px;
+    }
+    
+    /* Product Information Styling */
+    .product-info {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .product-name {
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .product-price {
+        font-size: 1.2rem;
+        color: #e47911; /* Amazon-like orange */
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .product-description {
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 15px;
+    }
+    
+    .view-details-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff9900; /* Amazon orange */
+        color: #fff;
+        font-weight: bold;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background-color 0.2s;
+    }
+    
+    .view-details-btn:hover {
+        background-color: #e87d00; /* Darker orange for hover */
+    }
+    
+    /* Empty State Message */
+    .no-products-message {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #666;
+    }
+    
+</style>
+<div class="fashion_section">
+<div class="product-listing-container">
+    <h2 class="page-title">Product List</h2>
+
+    <div class="product-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-price">${{ product.price }}</p>
+                    <p class="product-description">{{ product.short_description }}</p>
+                    <a href="{% url 'product_detail' product.id %}" class="btn view-details-btn">View Details</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="no-products-message">
+                <p>No products available.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+{% endblock %}
+

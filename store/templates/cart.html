@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* General Cart Page Styling */
+    .fashion_section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+    }
+    
+    .fashion_section h2 {
+        font-size: 2.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .cart-items {
+        margin-bottom: 40px;
+        border-bottom: 2px solid #e1e1e1;
+        padding-bottom: 20px;
+    }
+    
+    .cart-items ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .cart-items li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #f1f1f1;
+        padding: 15px 0;
+    }
+    
+    .cart-items img {
+        max-width: 80px;
+        height: auto;
+        margin-right: 15px;
+    }
+    
+    .cart-items .product-info {
+        flex: 1;
+    }
+    
+    .cart-items .product-info .product-name {
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .cart-items .product-info .product-price {
+        font-size: 1rem;
+        color: #e47911;
+    }
+    
+    .cart-items .remove-btn {
+        background-color: #ff4d4d;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    
+    .cart-items .remove-btn:hover {
+        background-color: #e04343;
+    }
+    
+    .total-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+    }
+    
+    .total-section h3 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .checkout-btn {
+        background-color: #ff9900;
+        padding: 15px 25px;
+        font-size: 1.2rem;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .checkout-btn:hover {
+        background-color: #e87d00;
+    }
+    
+    .empty-cart {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #888;
+    }
+</style>
+
+<div class="fashion_section">
+    <h2>Your Cart</h2>
+    
+    <div class="cart-items">
+        {% if cart.products.all %}
+            <ul>
+                {% for product in cart.products.all %}
+                    <li>
+                        <div class="product-image">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+                        </div>
+                        <div class="product-info">
+                            <span class="product-name">{{ product.name }}</span>
+                            <span class="product-price">${{ product.price }}</span>
+                        </div>
+                        
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-cart">Your cart is empty.</p>
+        {% endif %}
+    </div>
+    
+    <div class="total-section">
+        <h3>Total: ${{ total_price }}</h3>
+        <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
+    </div>
+</div>
+
+{% endblock %}

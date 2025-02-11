@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* General Account Page Styling */
+    .account-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .account-container h1 {
+        font-size: 2.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #e1e1e1;
+        padding-bottom: 10px;
+    }
+
+    .cart-section,
+    .orders-section {
+        margin-bottom: 30px;
+    }
+
+    .cart-items,
+    .order-items {
+        list-style-type: none;
+        padding-left: 0;
+        margin-top: 10px;
+    }
+
+    .cart-items li,
+    .order-items li {
+        background-color: #f9f9f9;
+        border: 1px solid #e1e1e1;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .cart-items li .product-name,
+    .order-items li .product-name {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .cart-items li .product-price,
+    .order-items li .product-price {
+        font-size: 1.1rem;
+        color: #e47911; /* Price color */
+    }
+
+    .order-items li .download-link {
+        font-size: 1rem;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .order-items li .download-link:hover {
+        text-decoration: underline;
+    }
+
+    .empty-message {
+        font-size: 1.2rem;
+        color: #888;
+        margin-top: 20px;
+    }
+
+    .back-to-home {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 20px;
+        background-color: #ff9900;
+        color: white;
+        font-size: 1.2rem;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .back-to-home:hover {
+        background-color: #e87d00;
+    }
+
+</style>
+<div class="fashion_section">
+<div class="account-container">
+    <h1>Welcome to Your Account</h1>
+
+    {% if user.userprofile.is_approved %}
+        <!-- Orders Section -->
+        <div class="orders-section">
+            <h2 class="section-title">Your Orders</h2>
+            {% if orders %}
+                {% for order in orders %}
+                    <div class="order-summary">
+                        <h3>Order #{{ order.id }} - Total: ${{ order.total_price }}</h3>
+                        <ul class="order-items">
+                            {% for product in order.products.all %}
+                                <li>
+                                    <span class="product-name">{{ product.name }}</span> - 
+                                    <span class="product-price">${{ product.price }}</span>
+                                    {% if product.zip_file %}
+                                        <a href="{{ product.zip_file.url }}" download class="download-link">Download Code (Zip)</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-message">You have not placed any orders yet.</p>
+            {% endif %}
+        </div>
+    {% else %}
+        <p class="empty-message">Your account is not approved. Please contact an admin.</p>
+    {% endif %}
+
+    
+
+    <!-- Back to Home Button -->
+    <a href="{% url 'home' %}" class="back-to-home">Back to Home</a>
+</div>
+</div>
+
+{% endblock %}

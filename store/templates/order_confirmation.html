@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* General Order Success Page Styling */
+    .order-success-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .order-success-container h2 {
+        font-size: 2.5rem;
+        color: #4CAF50;  /* Success green */
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .order-success-container p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .order-details {
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+        color: #555;
+    }
+
+    .order-details .order-id {
+        font-weight: bold;
+    }
+
+    .order-details .total-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #e47911; /* Price orange */
+    }
+
+    .action-btns {
+        margin-top: 30px;
+    }
+
+    .action-btns a {
+        display: inline-block;
+        padding: 15px 25px;
+        background-color: #ff9900; /* Amazon-like orange */
+        color: white;
+        font-size: 1.2rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        margin: 5px;
+    }
+
+    .action-btns a:hover {
+        background-color: #e87d00;
+    }
+
+    .order-summary {
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
+
+    .order-summary h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .order-summary p {
+        font-size: 1rem;
+        color: #555;
+        margin: 8px 0;
+    }
+
+</style>
+<div class="fashion_section">
+<div class="order-success-container">
+    <h2>Order Confirmation</h2>
+
+    <p>Thank you for your order, <strong>{{ order.user.username }}</strong>!</p>
+
+    <div class="order-summary">
+        <h3>Order Details</h3>
+        <p class="order-id">Order ID: <strong>{{ order.id }}</strong></p>
+        <p class="total-price">Total Price: ${{ order.total_price }}</p>
+    </div>
+
+    <p>Your order will be processed and shipped shortly. You'll receive an email with tracking information soon.</p>
+
+    <div class="action-btns">
+        <a href="{% url 'my_account' %}">View My Orders</a>
+        <a href="{% url 'home' %}">Back to Home</a>
+    </div>
+</div>
+</div>
+{% endblock %}

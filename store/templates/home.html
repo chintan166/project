@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="fashion_section">
+    <div id="main_slider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% with first_div_counter=0 second_div_counter=0 %}
+                <!-- First carousel item (active by default) -->
+                <div class="carousel-item active">
+                    <div class="container">
+                        <h1 class="fashion_taital">Machine Learning</h1>
+                        <div class="fashion_section_2">
+                            <div class="row">
+                                {% for product in products_category_1 %}
+                                    {% if forloop.counter <= 3 %}
+                                        <div class="col-lg-4 col-sm-4">
+                                            <div class="box_main">
+                                                <h4 class="shirt_text">{{ product.name }}</h4>
+                                                <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                                <div class="tshirt_img"><img src="{{ product.image.url }}" alt="T-shirt Image"></div>
+                                                <div class="btn_main">
+                                                    <div class="buy_bt"><a href="{% url 'product_detail' product.id %}">Buy Now</a></div>
+                                                    <div class="seemore_bt"><a href="{% url 'product_detail' product.id %}">See More</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if products_category_1|length > 3 %}
+                    <!-- Second carousel item -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <h1 class="fashion_taital">Machine Learning</h1>
+                            <div class="fashion_section_2">
+                                <div class="row">
+                                    {% for product in products_category_1 %}
+                                        {% if forloop.counter > 3 and forloop.counter <= 6 %}
+                                            <div class="col-lg-4 col-sm-4">
+                                                <div class="box_main">
+                                                    <h4 class="shirt_text">{{ product.name }}</h4>
+                                                    <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                                    <div class="tshirt_img"><img src="{{ product.image.url }}" alt="T-shirt Image"></div>
+                                                    <div class="btn_main">
+                                                        <div class="buy_bt"><a href="{% url 'product_detail' product.id %}">Buy Now</a></div>
+                                                        <div class="seemore_bt"><a href="{% url 'product_detail' product.id %}">See More</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if products_category_1|length > 6 %}
+                    <!-- Third carousel item (additional products) -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <h1 class="fashion_taital">Machine Learning</h1>
+                            <div class="fashion_section_2">
+                                <div class="row">
+                                    {% for product in products_category_1 %}
+                                        {% if forloop.counter > 6 %}
+                                            <div class="col-lg-4 col-sm-4">
+                                                <div class="box_main">
+                                                    <h4 class="shirt_text">{{ product.name }}</h4>
+                                                    <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                                    <div class="tshirt_img"><img src="{{ product.image.url }}" alt="T-shirt Image"></div>
+                                                    <div class="btn_main">
+                                                        <div class="buy_bt"><a href="{% url 'product_detail' product.id %}">Buy Now</a></div>
+                                                        <div class="seemore_bt"><a href="{% url 'product_detail' product.id %}">See More</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Carousel controls -->
+        <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>
+
+<div class="fashion_section">
+    <div id="main_slider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% with first_div_counter=0 second_div_counter=0 %}
+                <!-- First carousel item (active by default) -->
+                <div class="carousel-item active">
+                    <div class="container">
+                        <h1 class="fashion_taital">Django</h1>
+                        <div class="fashion_section_2">
+                            <div class="row">
+                                {% for product in products_category_2 %}
+                                    {% if forloop.counter <= 3 %}
+                                        <div class="col-lg-4 col-sm-4">
+                                            <div class="box_main">
+                                                <h4 class="shirt_text">{{ product.name }}</h4>
+                                                <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                                <div class="tshirt_img"><img src="{{ product.image.url }}" alt="T-shirt Image"></div>
+                                                <div class="btn_main">
+                                                    <div class="buy_bt"><a href="{% url 'product_detail' product.id %}">Buy Now</a></div>
+                                                    <div class="seemore_bt"><a href="{% url 'product_detail' product.id %}">See More</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if products_category_1|length > 3 %}
+                    <!-- Second carousel item -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <h1 class="fashion_taital">Django</h1>
+                            <div class="fashion_section_2">
+                                <div class="row">
+                                    {% for product in products_category_2 %}
+                                        {% if forloop.counter > 3 and forloop.counter <= 6 %}
+                                            <div class="col-lg-4 col-sm-4">
+                                                <div class="box_main">
+                                                    <h4 class="shirt_text">{{ product.name }}</h4>
+                                                    <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                                    <div class="tshirt_img"><img src="{{ product.image.url }}" alt="T-shirt Image"></div>
+                                                    <div class="btn_main">
+                                                        <div class="buy_bt"><a href="{% url 'product_detail' product.id %}">Buy Now</a></div>
+                                                        <div class="seemore_bt"><a href="{% url 'product_detail' product.id %}">See More</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if products_category_1|length > 6 %}
+                    <!-- Third carousel item (additional products) -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <h1 class="fashion_taital">Django</h1>
+                            <div class="fashion_section_2">
+                                <div class="row">
+                                    {% for product in products_category_2 %}
+                                        {% if forloop.counter > 6 %}
+                                            <div class="col-lg-4 col-sm-4">
+                                                <div class="box_main">
+                                                    <h4 class="shirt_text">{{ product.name }}</h4>
+                                                    <p class="price_text">Price  <span style="color: #262626;">$ {{ product.price }}</span></p>
+                                                    <div class="tshirt_img"><img src="{{ product.image.url }}" alt="T-shirt Image"></div>
+                                                    <div class="btn_main">
+                                                        <div class="buy_bt"><a href="{% url 'product_detail' product.id %}">Buy Now</a></div>
+                                                        <div class="seemore_bt"><a href="{% url 'product_detail' product.id %}">See More</a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Carousel controls -->
+        <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>
+
+              
+
+
+   
+
+{% endblock %}

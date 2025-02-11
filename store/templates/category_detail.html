@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="fashion_section">
+
+<div class="container py-5">
+    <div class="category-header">
+        <h1 class="category-title">{{ category.name }}</h1>  <!-- Display category name -->
+        <p class="category-description">{{ category.description }}</p>  <!-- Display category description -->
+    </div>
+
+    <div class="product-listing">
+
+        {% if products %}
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm">
+                            <a href="{% url 'product_detail' product.id %}">
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>  <!-- Product name -->
+                                <p class="card-text">{{ product.description|truncatewords:20 }}</p>  <!-- Truncated product description -->
+                                <p class="price text-muted">${{ product.price }}</p>  <!-- Display price -->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No products found in this category.</p>
+        {% endif %}
+    </div>
+</div>
+</div>
+
+{% endblock %}
